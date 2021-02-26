@@ -1,0 +1,33 @@
+body {
+  background-image: url(../images/fon.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.form {
+  padding-top: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form .input-group {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form button {
+  width: 100%;
+}
+
+h3,
+.alert {
+  text-align: center;
+}
+
+.date_clock {
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+}
