@@ -2,6 +2,7 @@ const form = document.querySelector(".form")
 const button = document.querySelector("button")
 const email = document.querySelector("input[name=login]")
 const password = document.querySelector("input[name=password]")
+const phone = document.querySelector("input[name=phone]")
 
 // Helpers
 
@@ -9,6 +10,19 @@ function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+
+function validatePhone(phone) {
+	const simbols = ['(', ')', '-', '+']
+	
+	const removeSimbols = (tel) => {
+		simbols.forEach((simbol) => tel = String(tel).replaceAll(simbol, ''))
+		return tel
+	}
+	const clearPhone = removeSimbols(phone);
+		return !Number.isNaN(Number(clearPhone)) && clearPhone.length === 11 && (clearPhone[0] === '7' || clearPhone[0] === '8')
+
+}
+
 
 const weekDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
@@ -20,7 +34,8 @@ function forwardZero(str) {
 
 const errorObj = {
 	login: {},
-	password: {}
+	password: {},
+	phone: {}
 }
 
 const errorNode = document.createElement('div');
@@ -35,9 +50,11 @@ form.addEventListener("submit", function (event) {
 	document.querySelectorAll('.alert').forEach((el) => el.remove())
 
 	errorObj.login = {};
-	errorObj.password = {}; 
+	errorObj.password = {};
+	errorObj.phone = {};
 	
 	const isEmailValid = validateEmail(email.value);
+	const isPhoneValid = validatePhone(phone.value);
 	const isPasswordLength = passwordValue.length >= 6;
 	const isSpecSimbols = /(?=.[!@#$%^&])/g.test(passwordValue);
 	const isCase = /([a-z])/g.test(passwordValue) && /([A-Z])/g.test(passwordValue);
@@ -47,7 +64,12 @@ form.addEventListener("submit", function (event) {
 		status: isEmailValid,
 		text: 'Невалидный e-mail'
 	}
-
+	
+	errorObj.phone["isPhoneValid"] = {
+		status: isPhoneValid,
+		text: 'Невалидный телефон'
+	}
+	
 	errorObj.password["isPasswordLength"] = {
 		status: isPasswordLength,
 		text: 'Длина пароля должна быть не менее 6 символов',
