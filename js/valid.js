@@ -62,12 +62,12 @@ form.addEventListener("submit", function (event) {
 
 	errorObj.login["isEmailValid"] = {
 		status: isEmailValid,
-		text: 'Невалидный e-mail'
+		text: 'Невалидный e-mail. Вводите в формате ххх@хх.хх'
 	}
 	
 	errorObj.phone["isPhoneValid"] = {
 		status: isPhoneValid,
-		text: 'Невалидный телефон'
+		text: 'Невалидный телефон. Используйте формат 8хххххххххх, +7хххххххххх, 8(ххх)ххххххх, +7(ххх)ххххххх.'
 	}
 	
 	errorObj.password["isPasswordLength"] = {
